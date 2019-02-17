@@ -1,6 +1,9 @@
-<?php // Filename: function.inc.php
+<?php // Filename: functions.inc.php
+// this page contains all the various functions that get called to create the page
 
+//this function displays messages to display to the user after they do things
 function display_message(){
+    // if there is a message set, display it using a query string in the url
     if (isset($_GET['message'])) {
         $message = $_GET['message'];
         echo '<div class="mt-4 alert alert-success" role="alert">';
@@ -9,12 +12,13 @@ function display_message(){
     }
 }
 
-
+// this function is used to display all the letters in the alphabet, and highlight the one that's selected if selected
 function display_letter_filters($filter){  
     echo '<span class="mr-3">Filter by <strong>Last Name</strong></span>';
- 
+    //this creates the arrage of letters a through z
     $letters = range('A','Z');
-
+    
+    //this moves through the letters apply a class to style them, and to highlight the selected letter
     for($i=0 ; $i < count($letters) ; $i++){ 
         if ($filter == $letters[$i]) {
             $class = 'class="text-light font-weight-bold p-1 mr-3 bg-dark"';
@@ -26,7 +30,10 @@ function display_letter_filters($filter){
     echo '<a class="text-secondary p-2 mr-2 bg-success text-light border rounded" href="?clearfilter" title="Reset Filter">Reset</a>&nbsp;&nbsp;';
 }
 
-
+//this function is used to style the table, display the contents of it, and display the contents if sorted by a column
+//this function currently contains a link to delete a row if the link is clicked, but not one to update the row
+//this function is also used to echo out a pop up message confirming if someone is sure they want to delete a file
+//the record will be deleted and follow the href unless the action is cancelled by the onclick pop up
 function display_record_table($result){
     echo '<div class="table-responsive">';
     echo "<table class=\"table table-striped table-hover table-sm mt-4\">";
@@ -48,7 +55,9 @@ function display_record_table($result){
     echo '</div>';
 }
 
-
+// this function is used to display the content of the error bucket array and
+// the corresponding error messages to the fields left blank
+// the contents of this bucket get displayed as an unordered list
 function display_error_bucket($error_bucket){
     echo '<p>The following errors were deteced:</p>';
     echo '<div class="pt-4 alert alert-warning" role="alert">';

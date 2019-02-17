@@ -1,4 +1,5 @@
 <?php // Filename: navbar.inc.php ?>
+<!-- HTML to create a navigation bar, which will be called for using require in the header include file -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <a class="navbar-brand" href="display-records.php">CTEC 127</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -25,6 +26,7 @@
         </div>
       </li>
     </ul>
+    <!-- Call the search-records.php file function for the search form to display results if used-->
     <form action="search-records.php" method="POST" class="form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2" type="search" placeholder="Search" name="search" aria-label="Search">
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>

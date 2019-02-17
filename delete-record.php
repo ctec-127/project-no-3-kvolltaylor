@@ -1,6 +1,9 @@
 <?php // Filename: delete-record.php
 
+// magic constant of __DIR__ returns the directory of the file when used with an include
+// use to connect to database
 require __DIR__ . "/inc/db/mysqli_connect.inc.php";
+// use to bring in config file and display updated info
 require __DIR__ . "/inc/app/config.inc.php";
 
 // check to see if id is in the query string
