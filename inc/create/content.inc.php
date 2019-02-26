@@ -40,6 +40,22 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
         #$id = $_POST['id'];
         $id = $db->real_escape_string($_POST['id']);
     }
+    // added sections to add gpa, degree program, and financial aid to error bucket
+    if (empty($_POST['gpa'])) {
+        array_push($error_bucket, "<p>A GPA is required.</p>");
+    } else {
+        $gpa = $db->real_escape_string($_POST['gpa']);
+    }
+    if (empty($_POST['degree_program'])) {
+        array_push($error_bucket, "<p>A Degree Program is required.</p>");
+    } else {
+        $degree_program = $db->real_escape_string($_POST['degree_program']);
+    }
+    if (empty($_POST['financial_aid'])) {
+        array_push($error_bucket, "<p>Financial Aid info is required.</p>");
+    } else {
+        $financial_aid = $db->real_escape_string($_POST['financial_aid']);
+    }
     if (empty($_POST['email'])) {
         array_push($error_bucket,"<p>An email address is required.</p>");
     } else {
@@ -57,9 +73,11 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
     if (count($error_bucket) == 0) {
         // Time for some SQL
         // tells which columns to insert the new data into
-        $sql = "INSERT INTO $db_table (first_name,last_name,student_id,email,phone) ";
+        // added gpa, degree program, and financial aid as columns to insert into table
+        $sql = "INSERT INTO $db_table (first_name,last_name,student_id,gpa,financial_aid,degree_program,email,phone) ";
         // tells what the data is to insert into the columns for the new row
-        $sql .= "VALUES ('$first','$last',$id,'$email','$phone')";
+        // added gpa, degree program, and financial aid as values
+        $sql .= "VALUES ('$first','$last',$id,$gpa,'$financial_aid','$degree_program','$email','$phone')";
 
         // comment in for debug of SQL
         // echo $sql;
@@ -78,9 +96,13 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
             I saved that new record for you!
           </div>';
         //   unset is used here to refresh the variables so that they can now accept new info
+        // added gpa, degree program, and financial aid to list of variables to unset
             unset($first);
             unset($last);
             unset($id);
+            unset($gpa);
+            unset($degree_program);
+            unset($financial_aid);
             unset($email);
             unset($phone);
         }

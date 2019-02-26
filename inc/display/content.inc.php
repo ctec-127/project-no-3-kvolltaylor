@@ -1,4 +1,4 @@
-<?php // Filename: connect.inc.php
+<?php // Filename: content.inc.php
 
 // bring in the below files using require
 // __DIR__ is a magic constant that returns the directory of the file when used with an include

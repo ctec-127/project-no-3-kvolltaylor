@@ -45,7 +45,7 @@ CREATE TABLE `student_v2` (
 -- Dumping data for table `student_v2`
 --
 
-INSERT INTO `student_v2` (`id`, `student_id`, `first_name`, `last_name`, `email`, `phone`, `degree_program`, `gpa`, `financial_aid`, `data_created`) VALUES
+INSERT INTO `student_v2` (`id`, `student_id`, `first_name`, `last_name`, `gpa`, `financial_aid`, `degree_program`, `email`, `phone`, `data_created`) VALUES
 (1, 1000, 'Quynn', 'Berger', 'lobortis.ultrices.Vivamus@aliquamenimnec.co.uk', '749-1162', '', 1, 1, '2019-02-14 04:01:15'),
 (2, 999, 'Troy', 'Rojas', 'rutrum.magna@faucibusorciluctus.org', '921-0141', '', 4, 1, '2019-02-14 04:01:15'),
 (3, 998, 'Lionel', 'Merrill', 'ligula.eu.enim@iaculisquis.edu', '1-653-852-2223', '', 2, 1, '2019-02-14 04:01:15'),
