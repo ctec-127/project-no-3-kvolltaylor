@@ -41,9 +41,9 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
         $id = $db->real_escape_string($_POST['id']);
     }
     // added sections to add gpa, degree program, and financial aid to error bucket
-    if (empty($_POST['gpa'])) {
+    if ($_POST['gpa'] == "") {
         array_push($error_bucket, "<p>A GPA is required.</p>");
-    } else {
+    } elseif ($_POST['gpa'] >= "0"){
         $gpa = $db->real_escape_string($_POST['gpa']);
     }
     if (empty($_POST['degree_program'])) {
@@ -51,7 +51,7 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
     } else {
         $degree_program = $db->real_escape_string($_POST['degree_program']);
     }
-    if (empty($_POST['financial_aid'])) {
+    if ($_POST['financial_aid'] == "") {
         array_push($error_bucket, "<p>Financial Aid info is required.</p>");
     } else {
         $financial_aid = $db->real_escape_string($_POST['financial_aid']);

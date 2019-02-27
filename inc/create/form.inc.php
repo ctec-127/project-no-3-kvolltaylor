@@ -12,8 +12,6 @@ http://php.net/manual/en/language.operators.comparison.php#language.operators.co
 <!-- add a require to bring in functions include file to determine radio button value -->
 
 
-
-
 <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" method="POST">
     <div class="form-group">
         <label class="col-form col-form-label" for="first">First Name </label>
@@ -32,12 +30,13 @@ http://php.net/manual/en/language.operators.comparison.php#language.operators.co
     <br>
     <label class="col-form-label">Financial Aid</label>
     <!-- added check to see if is set, then to define that variable if a button is picked, or else define variable as empty -->
-    <?php if (empty($_POST['financial_aid'])){$financial_aid = "";} else {$_POST['financial_aid'];}?>
+    <?php if (!isset($_POST['financial_aid'])){$financial_aid = '';} else 
+    {$financial_aid = $_POST['financial_aid'];}?>
     <div class="form-check-inline">
-        <input class="form-check-input" type="radio" id="financial_aid_yes" name="financial_aid" value="1" <?php if (isset($financial_aid) && $financial_aid == "1") echo "checked" ?>><label class="form-check-label" for="financial_aid_yes">Yes</label>
+        <input class="form-check-input" type="radio" id="financial_aid_yes" name="financial_aid" value="1" <?php if ($financial_aid == "1") echo "checked" ?>><label class="form-check-label" for="financial_aid_yes">Yes</label>
     </div>
     <div class="form-check-inline">
-        <input class="form-check-input" type="radio" id="financial_aid_no" name="financial_aid" value="0" <?php if (isset($financial_aid) && $financial_aid == "0") echo "checked" ?>><label class="form-check-label" for="financial_aid_no">No</label>
+        <input class="form-check-input" type="radio" id="financial_aid_no" name="financial_aid" value="0" <?php if ($financial_aid == "0") echo "checked" ?>><label class="form-check-label" for="financial_aid_no">No</label>
     </div>
     <br>
     <div class="form-group">
