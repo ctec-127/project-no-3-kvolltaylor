@@ -79,8 +79,8 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
     if (count($error_bucket) == 0) {
         // Time for some SQL
         // tells which columns to insert the new data into
-        // added gpa, degree program, and financial aid as columns to insert into table
-        $sql = "INSERT INTO $db_table (first_name,last_name,student_id,gpa,financial_aid,degree_program,email,phone) ";
+        // added gpa, degree program, and financial aid as columns to insert into table, added data created as column to insert into table
+        $sql = "INSERT INTO $db_table (first_name,last_name,student_id,gpa,financial_aid,degree_program,email,phone, data_created) ";
         // tells what the data is to insert into the columns for the new row
         // added gpa, degree program, and financial aid variables as values
         $sql .= "VALUES ('$first','$last',$id,$gpa,'$financial_aid','$degree_program','$email','$phone')";
