@@ -25,24 +25,29 @@ http://php.net/manual/en/language.operators.comparison.php#language.operators.co
     <input class="form-control" type="text" id="id" name="id" value="<?php echo (isset($id) ? $id: '');?>">
     <br>
     <!-- added sections in the form to add gpa, financial aid, and degree fields-->
+    <!-- added GPA -->
     <label class="col-form-label" for="gpa">GPA</label>
+    <!-- added in sticky value to echo out entry if it is set -->
     <input class="form-control" type="text" id="gpa" name="gpa" value="<?php echo (isset($gpa) ? $gpa: '');?>">
     <br>
+    <!-- added Financial Aid -->
     <label class="col-form-label">Financial Aid</label>
     <!-- added check to see if is set, then to define that variable if a button is picked, or else define variable as empty -->
     <?php if (!isset($_POST['financial_aid'])){$financial_aid = '';} else 
     {$financial_aid = $_POST['financial_aid'];}?>
     <div class="form-check-inline">
+    <!-- added in sticky value to echo out that that radio button option is checked if it was selected -->
         <input class="form-check-input" type="radio" id="financial_aid_yes" name="financial_aid" value="1" <?php if ($financial_aid == "1") echo "checked" ?>><label class="form-check-label" for="financial_aid_yes">Yes</label>
     </div>
     <div class="form-check-inline">
         <input class="form-check-input" type="radio" id="financial_aid_no" name="financial_aid" value="0" <?php if ($financial_aid == "0") echo "checked" ?>><label class="form-check-label" for="financial_aid_no">No</label>
     </div>
     <br>
+    <!-- added Degree Program -->
     <div class="form-group">
         <label class="col-form-label pt-4" for="dp">Degree Program</label>
         <select class="form-control" name="degree_program" id="dp">
-        <!-- added check to see if is set, then to define the variable if an option is selected, or else to define variable as empty  -->
+        <!-- added in sticky value, using a check to see if is set, then to define the variable as that option if it is the one selected, or else to define variable as empty  -->
             <?php if (isset($_POST['degree_program'])){$degree_program = $_POST['degree_program'];} else {$degree_program = "";}?>
             <option value="Chainsaw Juggling" <?php if($degree_program == "Chainsaw Juggling") echo ' selected="selected"' ?>>Chainsaw Juggling</option>
             <option value="Trapeze" <?php if($degree_program == "Trapeze") echo ' selected="selected"' ?>>Trapeze</option>

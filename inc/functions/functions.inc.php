@@ -75,16 +75,7 @@ function display_error_bucket($error_bucket){
     echo '<p>All of these fields are required. Please fill them in.</p>';
 }
 
-// added function to set value to 1 or 0 if a student has financial aid or doesn't
-// function financial_aid_check($financial_aid){
-//     if ($financial_aid == 'Yes'){
-//         $financial_aid = 1;
-//     }
-//     elseif ($financial_aid == 'No') {
-//     $financial_aid = 0;
-//     }
-//     return $financial_aid;
-// }
+
 
 
 

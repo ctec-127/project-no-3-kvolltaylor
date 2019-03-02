@@ -17,7 +17,8 @@ require 'inc/app/config.inc.php';
                 // if the search submit button was not submitted with no text, do this:
                 if(!empty($_POST['search'])){
                     // perform the search of the student table with the search string in the following columns for matching strings
-                    $sql = "SELECT * FROM $db_table WHERE " . '"' . $_POST["search"] . '"' . " IN (student_id, first_name, last_name, degree_program, email, phone) ORDER BY last_name ASC";
+                    // added gpa, financial aid, and degree program columns to include in the search
+                    $sql = "SELECT * FROM $db_table WHERE " . '"' . $_POST["search"] . '"' . " IN (student_id, first_name, last_name, gpa, financial_aid, degree_program, email, phone) ORDER BY last_name ASC";
                     // $sql = "SELECT * FROM student WHERE student_id LIKE '%val%' or field2 LIKE '%val%'
                     // contain the result of that search in the variable $result
                     $result = $db->query($sql);

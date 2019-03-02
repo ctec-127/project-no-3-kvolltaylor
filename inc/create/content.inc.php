@@ -41,16 +41,22 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
         $id = $db->real_escape_string($_POST['id']);
     }
     // added sections to add gpa, degree program, and financial aid to error bucket
+    // added gpa
+    // added check to see if gpa is equal to empty string, and if so to push to the error bucket
     if ($_POST['gpa'] == "") {
         array_push($error_bucket, "<p>A GPA is required.</p>");
     } elseif ($_POST['gpa'] >= "0"){
         $gpa = $db->real_escape_string($_POST['gpa']);
     }
+    // added degree program
+    // added check to see if the field was empty, and if so to push to the error bucket
     if (empty($_POST['degree_program'])) {
         array_push($error_bucket, "<p>A Degree Program is required.</p>");
     } else {
         $degree_program = $db->real_escape_string($_POST['degree_program']);
     }
+    //added financial aid
+    // added check to see if financial is equal to empty string, and if so to push to the error bucket
     if ($_POST['financial_aid'] == "") {
         array_push($error_bucket, "<p>Financial Aid info is required.</p>");
     } else {
@@ -76,7 +82,7 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
         // added gpa, degree program, and financial aid as columns to insert into table
         $sql = "INSERT INTO $db_table (first_name,last_name,student_id,gpa,financial_aid,degree_program,email,phone) ";
         // tells what the data is to insert into the columns for the new row
-        // added gpa, degree program, and financial aid as values
+        // added gpa, degree program, and financial aid variables as values
         $sql .= "VALUES ('$first','$last',$id,$gpa,'$financial_aid','$degree_program','$email','$phone')";
 
         // comment in for debug of SQL
