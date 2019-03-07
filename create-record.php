@@ -12,9 +12,9 @@ require 'inc/layout/header.inc.php';
 			<!-- use magic constant of __DIR__ for the full path -->
 			<!-- use to add a row to the table if all fields are 
 			filled out correctly, or to display errors until filled out correctly -->
-			<?php require __DIR__ .'/inc/create/content.inc.php'; ?>
+			<?php require_once __DIR__ .'/inc/create/content.inc.php'; ?>
 			<!-- use to load up the page for every new record a user might want to enter -->
-			<?php require __DIR__ .'/inc/create/form.inc.php' ?>
+			<?php require_once __DIR__ .'/inc/shared/form.inc.php' ?>
 		</div>
     </div>
 </div>

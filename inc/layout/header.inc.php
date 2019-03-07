@@ -15,5 +15,9 @@
 <body>
 <!-- Use require to pull in the include file to bring in the config file with variable values on each page -->
 <!-- Use require to pull in the inculde file for displaying the navigation bar html on each page -->
-<?php require 'inc/app/config.inc.php';?> 
-<?php require 'inc/layout/navbar.inc.php';?> 
+<!-- Use require to pull in the inculde file to bring in the functions file for each page -->
+<?php 
+    require 'inc/functions/functions.inc.php';
+    require 'inc/app/config.inc.php';
+    require 'inc/layout/navbar.inc.php';
+?>

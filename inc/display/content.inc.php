@@ -2,8 +2,8 @@
 
 // bring in the below files using require
 // __DIR__ is a magic constant that returns the directory of the file when used with an include
-require __DIR__ . "/../db/mysqli_connect.inc.php";
-require __DIR__ . "/../functions/functions.inc.php";
+require_once __DIR__ . "/../db/mysqli_connect.inc.php";
+require_once __DIR__ . "/../functions/functions.inc.php";
 
 //initialize variables
 //$orderby is set to default to sort by last name
@@ -38,7 +38,7 @@ $result = $db->query($sql);
 // if there are no results for the filter, this echos out a message saying so
 if ($result->num_rows == 0) {
     echo "<h2 class=\"mt-4 alert alert-warning\">No Records for <strong>last names</strong> starting with <strong>$filter</strong></h2>";
-//if there was nothing typed in for a filter, then nothing will display in the result text telling the user which
+//if there was nothing entered for a filter, then nothing will display in the result text telling the user which
 //last names start with the entered filter string
 } else {
     if(empty($filter)){

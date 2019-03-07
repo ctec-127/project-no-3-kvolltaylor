@@ -3,7 +3,6 @@
 // bring in the below files using require
 // __DIR__ is a magic constant that returns the directory of the file when used with an include
 require_once __DIR__ . "/../db/mysqli_connect.inc.php";
-require_once __DIR__ . "/../functions/functions.inc.php";
 require_once __DIR__ . "/../app/config.inc.php";
 
 // initializes a variable to contain an array of any and all errors
@@ -19,6 +18,11 @@ $error_bucket = [];
 // if the field is not empty, it keeps that info for the relevant variable for that field
 
 if($_SERVER['REQUEST_METHOD']=="POST"){
+    // grab primary key from hidden field
+    if (!empty($_POST['id'])) {
+       $id = $_POST['id'];
+    }
+
     // First insure that all required fields are filled in
     if (empty($_POST['first'])) {
         array_push($error_bucket,"<p>A first name is required.</p>");
@@ -34,11 +38,11 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
         #$last = $_POST['last'];
         $last = $db->real_escape_string($_POST['last']);
     }
-    if (empty($_POST['id'])) {
+    if (empty($_POST['sid'])) {
         array_push($error_bucket,"<p>A student ID is required.</p>");
     } else {
         #$id = $_POST['id'];
-        $id = $db->real_escape_string($_POST['id']);
+        $sid = $db->real_escape_string($_POST['sid']);
     }
     // added sections to add gpa, degree program, and financial aid to error bucket
     // added gpa
@@ -80,11 +84,11 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
         // Time for some SQL
         // tells which columns to insert the new data into
         // added gpa, degree program, and financial aid as columns to insert into table, added data created as column to insert into table
-        $sql = "INSERT INTO $db_table (first_name,last_name,student_id,gpa,financial_aid,degree_program,email,phone, data_created) ";
+        // $sql = "INSERT INTO $db_table (first_name,last_name,student_id,gpa,financial_aid,degree_program,email,phone, data_created) ";
         // tells what the data is to insert into the columns for the new row
         // added gpa, degree program, and financial aid variables as values
-        $sql .= "VALUES ('$first','$last',$id,$gpa,'$financial_aid','$degree_program','$email','$phone')";
-
+        // $sql .= "VALUES ('$first','$last',$id,$gpa,'$financial_aid','$degree_program','$email','$phone')";
+        $sql = "UPDATE $db_table SET first_name='$first', last_name='$last', student_id=$sid, email='$email',phone='$phone' WHERE id=$id";
         // comment in for debug of SQL
         // echo $sql;
         // the variable $result contains the results of the query to
@@ -105,16 +109,36 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
         // added gpa, degree program, and financial aid to list of variables to unset
             unset($first);
             unset($last);
-            unset($id);
+            unset($sid);
             unset($gpa);
             unset($degree_program);
             unset($financial_aid);
             unset($email);
             unset($phone);
+            unset($id);
         }
         // display the contents of the error bucket, meaning display the messages about required fields to fill out
     } else {
         display_error_bucket($error_bucket);
+    }
+} else {
+    // check for record id (primary key)
+    $id = $_GET['id'];
+    // now we need to query the database and get the data for the record
+    // note limit 1
+    $sql = "SELECT * FROM $db_table WHERE id=$id LIMIT 1";
+    // query database
+    $result = $db->query($sql);
+    // get the one row of data
+    while($row = $result->fetch_assoc()) {
+        $first = $row['first_name'];
+        $last = $row['last_name'];
+        $sid = $row['student_id'];
+        $gpa = $row['gpa'];
+        $degree_program = $row['degree_program'];
+        $financial_aid = $row['financial_aid'];
+        $email = $row['email'];
+        $phone = $row['phone'];
     }
 }
 

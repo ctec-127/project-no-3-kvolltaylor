@@ -3,10 +3,10 @@
 // Set $pageTitle variable to display proper page title before it's called in by the header include file
 $pageTitle = "Search Records";
 // Call in the include files for the header, the mysql connection to the database, the functions, and the config file
-require 'inc/layout/header.inc.php';
-require 'inc/db/mysqli_connect.inc.php';
-require 'inc/functions/functions.inc.php';
-require 'inc/app/config.inc.php';
+require_once 'inc/layout/header.inc.php';
+require_once 'inc/db/mysqli_connect.inc.php';
+// require 'inc/functions/functions.inc.php';
+require_once 'inc/app/config.inc.php';
 ?>
 
 <div class="container">
@@ -19,7 +19,9 @@ require 'inc/app/config.inc.php';
                     // perform the search of the student table with the search string in the following columns for matching strings
                     // added gpa, financial aid, and degree program columns to include in the search
                     $sql = "SELECT * FROM $db_table WHERE " . '"' . $_POST["search"] . '"' . " IN (student_id, first_name, last_name, gpa, financial_aid, degree_program, email, phone) ORDER BY last_name ASC";
-                    // $sql = "SELECT * FROM student WHERE student_id LIKE '%val%' or field2 LIKE '%val%'
+                    // IGNORE $search_term = $_POST['search'];
+                    // IGNORE $sql ="SELECT * FROM $db_table WHERE student_id OR first_name LIKE '$search_term'";
+                    // $sql = "SELECT * FROM 'student' WHERE student_id LIKE '%val%' or field2 LIKE '%val%'
                     // contain the result of that search in the variable $result
                     $result = $db->query($sql);
 

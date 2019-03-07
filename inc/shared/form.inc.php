@@ -21,8 +21,8 @@ http://php.net/manual/en/language.operators.comparison.php#language.operators.co
         <label class="col-form-label" for="last">Last Name </label>
         <input class="form-control" type="text" id="last" name="last" value="<?php echo (isset($last) ? $last: '');?>">
     </div>
-    <label class="col-form-label" for="id">Student ID </label>
-    <input class="form-control" type="text" id="id" name="id" value="<?php echo (isset($id) ? $id: '');?>">
+    <label class="col-form-label" for="sid">Student ID </label>
+    <input class="form-control" type="text" id="sid" name="sid" value="<?php echo (isset($sid) ? $sid: '');?>">
     <br>
     <!-- added sections in the form to add gpa, financial aid, and degree fields-->
     <!-- added GPA -->
@@ -65,4 +65,5 @@ http://php.net/manual/en/language.operators.comparison.php#language.operators.co
     <br>
     <a href="display-records.php">Cancel</a>&nbsp;&nbsp;
     <button class="btn btn-primary" type="submit">Save Record</button>
+    <input type="hidden" name="id" value="<?php echo (isset($id) ? $id : '');?>">
 </form>
