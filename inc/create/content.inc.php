@@ -34,11 +34,11 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
         #$last = $_POST['last'];
         $last = $db->real_escape_string($_POST['last']);
     }
-    if (empty($_POST['id'])) {
+    if (empty($_POST['sid'])) {
         array_push($error_bucket,"<p>A student ID is required.</p>");
     } else {
         #$id = $_POST['id'];
-        $id = $db->real_escape_string($_POST['id']);
+        $sid = $db->real_escape_string($_POST['sid']);
     }
     // added sections to add gpa, degree program, and financial aid to error bucket
     // added gpa
@@ -62,6 +62,12 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
     } else {
         $financial_aid = $db->real_escape_string($_POST['financial_aid']);
     }
+    // added graduation date
+    if ($_POST['graduation_date'] == "") {
+        array_push($error_bucket,"<p>An expected date of graduation is required.</p>");
+    } else {
+        $graduation_date = $db->real_escape_string($_POST['graduation_date']);
+    }
     if (empty($_POST['email'])) {
         array_push($error_bucket,"<p>An email address is required.</p>");
     } else {
@@ -80,10 +86,10 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
         // Time for some SQL
         // tells which columns to insert the new data into
         // added gpa, degree program, and financial aid as columns to insert into table, added data created as column to insert into table
-        $sql = "INSERT INTO $db_table (first_name,last_name,student_id,gpa,financial_aid,degree_program,email,phone, data_created) ";
+        $sql = "INSERT INTO $db_table (first_name,last_name,sid,gpa,financial_aid,degree_program,graduation_date,email,phone)";
         // tells what the data is to insert into the columns for the new row
         // added gpa, degree program, and financial aid variables as values
-        $sql .= "VALUES ('$first','$last',$id,$gpa,'$financial_aid','$degree_program','$email','$phone')";
+        $sql .= "VALUES ('$first','$last',$sid,$gpa,'$financial_aid','$degree_program','$graduation_date','$email','$phone')";
 
         // comment in for debug of SQL
         // echo $sql;
@@ -108,6 +114,7 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
             unset($id);
             unset($gpa);
             unset($degree_program);
+            unset($graduation_date);
             unset($financial_aid);
             unset($email);
             unset($phone);

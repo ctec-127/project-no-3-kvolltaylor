@@ -5,7 +5,7 @@
 // will correctly display as Record Management
 
 $pageTitle = "Record Management";
-require 'inc/layout/header.inc.php'; 
+require_once 'inc/layout/header.inc.php'; 
 ?>
 <!-- HTML with responsive container to hold the content include file -->
 <div class="container-fluid">
@@ -21,4 +21,4 @@ require 'inc/layout/header.inc.php';
     </div> <!-- end row -->
 </div> <!-- end container -->
 <!-- footer include file is called in to display -->
-<?php require 'inc/layout/footer.inc.php'; ?>
+<?php require_once 'inc/layout/footer.inc.php'; ?>

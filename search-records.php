@@ -18,7 +18,7 @@ require_once 'inc/app/config.inc.php';
                 if(!empty($_POST['search'])){
                     // perform the search of the student table with the search string in the following columns for matching strings
                     // added gpa, financial aid, and degree program columns to include in the search
-                    $sql = "SELECT * FROM $db_table WHERE " . '"' . $_POST["search"] . '"' . " IN (student_id, first_name, last_name, gpa, financial_aid, degree_program, email, phone) ORDER BY last_name ASC";
+                    $sql = "SELECT * FROM $db_table WHERE " . '"' . $_POST["search"] . '"' . " IN (last_name) ORDER BY last_name ASC";
                     // IGNORE $search_term = $_POST['search'];
                     // IGNORE $sql ="SELECT * FROM $db_table WHERE student_id OR first_name LIKE '$search_term'";
                     // $sql = "SELECT * FROM 'student' WHERE student_id LIKE '%val%' or field2 LIKE '%val%'

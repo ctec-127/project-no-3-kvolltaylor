@@ -29,9 +29,10 @@ http://php.net/manual/en/language.operators.comparison.php#language.operators.co
     <label class="col-form-label" for="gpa">GPA</label>
     <!-- added in sticky value to echo out entry if it is set -->
     <input class="form-control" type="text" id="gpa" name="gpa" value="<?php echo (isset($gpa) ? $gpa: '');?>">
-    <br>
+    <br />
     <!-- added Financial Aid -->
-    <label class="col-form-label">Financial Aid</label>
+    <label class="col-form-label pb-2">Financial Aid</label>
+    <br />
     <!-- added check to see if is set, then to define that variable if a button is picked, or else define variable as empty -->
     <?php if (!isset($_POST['financial_aid'])){$financial_aid = '';} else 
     {$financial_aid = $_POST['financial_aid'];}?>
@@ -42,7 +43,7 @@ http://php.net/manual/en/language.operators.comparison.php#language.operators.co
     <div class="form-check-inline">
         <input class="form-check-input" type="radio" id="financial_aid_no" name="financial_aid" value="0" <?php if ($financial_aid == "0") echo "checked" ?>><label class="form-check-label" for="financial_aid_no">No</label>
     </div>
-    <br>
+    <br />
     <!-- added Degree Program -->
     <div class="form-group">
         <label class="col-form-label pt-4" for="dp">Degree Program</label>
@@ -56,14 +57,23 @@ http://php.net/manual/en/language.operators.comparison.php#language.operators.co
             <option value="Trick Riding" <?php if($degree_program == "Trick Riding") echo ' selected="selected"' ?>>Trick Riding</option>
         </select>
     </div>
-    <br>
+    <br />
+    <!-- added Graduation Date -->
+    <div class="form-group">
+    <label class="col-form-label pb-2" for="graduation_date">Graduation Date</label>
+    <br />
+    <input type="date" name="graduation_date" id="graduation_date" value="<?php $graduation_date = $_POST['graduation_date']; $date = date('Y-m-d H:i:s', strtotime($graduation_date)); echo $date; ?> ">
+    </div>
+    <br />
     <label class="col-form-label" for="email">Email </label>
     <input class="form-control" type="text" id="email" name="email" value="<?php echo (isset($email) ? $email: '');?>">
     <br>
     <label class="col-form-label" for="phone">Phone </label>
     <input class="form-control" type="text" id="phone" name="phone" value="<?php echo (isset($phone) ? $phone: '');?>">
     <br>
+    <input type="hidden" name="id" value="<?php echo (isset($id) ? $id : '');?>">
+    <input type="hidden" name="data_created" value="<?php echo (isset($data_created) ? $datacreated : ''); ?>">
     <a href="display-records.php">Cancel</a>&nbsp;&nbsp;
     <button class="btn btn-primary" type="submit">Save Record</button>
-    <input type="hidden" name="id" value="<?php echo (isset($id) ? $id : '');?>">
+
 </form>
