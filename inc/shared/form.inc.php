@@ -62,7 +62,7 @@ http://php.net/manual/en/language.operators.comparison.php#language.operators.co
     <div class="form-group">
     <label class="col-form-label pb-2" for="graduation_date">Graduation Date</label>
     <br />
-    <input type="date" name="graduation_date" id="graduation_date" value="<?php $graduation_date = $_POST['graduation_date']; $date = date('Y-m-d H:i:s', strtotime($graduation_date)); echo $date; ?> ">
+    <input type="date" name="graduation_date" id="graduation_date" value="<?php $graduation_date = $_POST['graduation_date']; $date = date('Y-m-d H:i:s', strtotime($graduation_date)); echo (!empty($date) ? $date: ''); ?> ">
     </div>
     <br />
     <label class="col-form-label" for="email">Email </label>
