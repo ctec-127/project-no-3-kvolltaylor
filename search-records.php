@@ -48,4 +48,4 @@ require_once 'inc/app/config.inc.php';
 </div>
 
 <!-- bring in the footer include file and display it using require -->
-<?php require 'inc/layout/footer.inc.php';?>
+<?php require_once 'inc/layout/footer.inc.php';?>

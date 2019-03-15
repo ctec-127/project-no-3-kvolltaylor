@@ -36,7 +36,7 @@ CREATE TABLE `student_v2` (
   `gpa` mediumint(9) NOT NULL,
   `financial_aid` mediumint(9) NOT NULL,
   `degree_program` varchar(255) NOT NULL,
-  `graduation_date` date DEFAULT NULL,
+  `graduation_date` date DEFAULT NOT NULL,
   `email` varchar(255) NOT NULL,
   `phone` varchar(100) NOT NULL,
   `data_created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP

@@ -2,7 +2,7 @@
 // set $pageTitle variable to display proper page title
 $pageTitle = "Create Record";
 // bring in header include file to display using require
-require 'inc/layout/header.inc.php'; 
+require_once 'inc/layout/header.inc.php'; 
 ?>
 
 <div class="container">
@@ -20,4 +20,4 @@ require 'inc/layout/header.inc.php';
 </div>
 
 <!-- bring in footer include file to display -->
-<?php require 'inc/layout/footer.inc.php'; ?>
+<?php require_once 'inc/layout/footer.inc.php'; ?>

@@ -23,7 +23,7 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
        $id = $_POST['id'];
     }
 
-    // First insure that all required fields are filled in
+    // First ensure that all required fields are filled in
     if (empty($_POST['first'])) {
         array_push($error_bucket,"<p>A first name is required.</p>");
     } else {
@@ -61,10 +61,17 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
     }
     //added financial aid
     // added check to see if financial is equal to empty string, and if so to push to the error bucket
-    if ($_POST['financial_aid'] == "") {
+    if (!isset($_POST['financial_aid'])) {
         array_push($error_bucket, "<p>Financial Aid info is required.</p>");
     } else {
         $financial_aid = $db->real_escape_string($_POST['financial_aid']);
+    }
+    // added graduation date
+    //added check to see if graduation date is empty, and if so to push to the error bucket
+    if ($_POST['graduation_date'] == "") {
+        array_push($error_bucket, "<p>An expected date of graduation is required.</p>");
+    } else {
+        $graduation_date = $db->real_escape_string($_POST['graduation_date']);
     }
     if (empty($_POST['email'])) {
         array_push($error_bucket,"<p>An email address is required.</p>");
@@ -88,7 +95,7 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
         // tells what the data is to insert into the columns for the new row
         // added gpa, degree program, and financial aid variables as values
         // $sql .= "VALUES ('$first','$last',$id,$gpa,'$financial_aid','$degree_program','$email','$phone')";
-        $sql = "UPDATE $db_table SET first_name='$first', last_name='$last', student_id=$sid, email='$email',phone='$phone' WHERE id=$id";
+        $sql = "UPDATE $db_table SET first_name='$first', last_name='$last', sid='$sid', gpa='$gpa', degree_program='$degree_program', financial_aid='$financial_aid', graduation_date='$graduation_date', email='$email',phone='$phone' WHERE id=$id";
         // comment in for debug of SQL
         // echo $sql;
         // the variable $result contains the results of the query to
@@ -105,14 +112,16 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
             echo '<div class="alert alert-success" role="alert">
             I saved that new record for you!
           </div>';
-        //   unset is used here to refresh the variables so that they can now accept new info
+        //  unset is used here to refresh the variables so that they can now accept new info
         // added gpa, degree program, and financial aid to list of variables to unset
+        // added graduation date to list of variables to unset, since all default values of 0000-00-00 are already set
             unset($first);
             unset($last);
             unset($sid);
             unset($gpa);
             unset($degree_program);
             unset($financial_aid);
+            unset($graduation_date);
             unset($email);
             unset($phone);
             unset($id);
@@ -130,16 +139,23 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
     // query database
     $result = $db->query($sql);
     // get the one row of data
+    // added degree program, gpa, financial aid, graduation date to add to that updated record
     while($row = $result->fetch_assoc()) {
         $first = $row['first_name'];
         $last = $row['last_name'];
-        $sid = $row['student_id'];
+        $sid = $row['sid'];
         $gpa = $row['gpa'];
         $degree_program = $row['degree_program'];
+        $graduation_date = $row['graduation_date'];
         $financial_aid = $row['financial_aid'];
         $email = $row['email'];
         $phone = $row['phone'];
     }
 }
+
+// echo is_string($graduation_date) ? 'string' : 'not a string';
+// echo "\n";
+
+
 
 ?>

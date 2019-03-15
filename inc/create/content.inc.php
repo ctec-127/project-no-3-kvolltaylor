@@ -81,11 +81,12 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
         $phone = $db->real_escape_string($_POST['phone']);
     }
 
-    // If we have no errors than we can try and insert the data
+    // If we have no errors then we can try and insert the data
     if (count($error_bucket) == 0) {
         // Time for some SQL
         // tells which columns to insert the new data into
-        // added gpa, degree program, and financial aid as columns to insert into table, added data created as column to insert into table
+        // added gpa, degree program, and financial aid as data to insert into table
+        // added graduation date as data to insert into table
         $sql = "INSERT INTO $db_table (first_name,last_name,sid,gpa,financial_aid,degree_program,graduation_date,email,phone)";
         // tells what the data is to insert into the columns for the new row
         // added gpa, degree program, and financial aid variables as values

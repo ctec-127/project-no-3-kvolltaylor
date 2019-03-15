@@ -31,38 +31,51 @@ http://php.net/manual/en/language.operators.comparison.php#language.operators.co
     <input class="form-control" type="text" id="gpa" name="gpa" value="<?php echo (isset($gpa) ? $gpa: '');?>">
     <br />
     <!-- added Financial Aid -->
-    <label class="col-form-label pb-2">Financial Aid</label>
-    <br />
-    <!-- added check to see if is set, then to define that variable if a button is picked, or else define variable as empty -->
-    <?php if (!isset($_POST['financial_aid'])){$financial_aid = '';} else 
-    {$financial_aid = $_POST['financial_aid'];}?>
-    <div class="form-check-inline">
-    <!-- added in sticky value to echo out that that radio button option is checked if it was selected -->
-        <input class="form-check-input" type="radio" id="financial_aid_yes" name="financial_aid" value="1" <?php if ($financial_aid == "1") echo "checked" ?>><label class="form-check-label" for="financial_aid_yes">Yes</label>
-    </div>
-    <div class="form-check-inline">
-        <input class="form-check-input" type="radio" id="financial_aid_no" name="financial_aid" value="0" <?php if ($financial_aid == "0") echo "checked" ?>><label class="form-check-label" for="financial_aid_no">No</label>
+    <div class="form-group">
+        <label class="col-form-label pb-2">Financial Aid</label>
+        <br />
+        <!-- added check to see if is set, then to define that variable if a button is picked, or else define variable as empty -->
+        <?php 
+        // echo (isset($financial_aid) ? $financial_aid: "");
+        ?> 
+        <div class="form-check-inline">
+        <!-- added in sticky value to echo out that that radio button option is checked if it was selected -->
+            <input class="form-check-input" type="radio" id="financial_aid_yes" name="financial_aid" value="1<?php echo (isset($financial_aid) ? $financial_aid: "");?>" <?php if ($financial_aid == "1") echo "checked";?>><label class="form-check-label" for="financial_aid_yes">Yes</label>
+        </div>
+        <div class="form-check-inline">
+            <input class="form-check-input" type="radio" id="financial_aid_no" name="financial_aid" value="0<?php echo (isset($financial_aid) ? $financial_aid: "");?>" <?php if ($financial_aid == "0") echo "checked";?>><label class="form-check-label" for="financial_aid_no">No</label>
+        </div>
     </div>
     <br />
     <!-- added Degree Program -->
-    <div class="form-group">
-        <label class="col-form-label pt-4" for="dp">Degree Program</label>
+    <div class="form-group mb-1">
+        <label class="col-form-label pt-1" for="dp">Degree Program</label>
         <select class="form-control" name="degree_program" id="dp">
         <!-- added in sticky value, using a check to see if is set, then to define the variable as that option if it is the one selected, or else to define variable as empty  -->
-            <?php if (isset($_POST['degree_program'])){$degree_program = $_POST['degree_program'];} else {$degree_program = "";}?>
-            <option value="Chainsaw Juggling" <?php if($degree_program == "Chainsaw Juggling") echo ' selected="selected"' ?>>Chainsaw Juggling</option>
-            <option value="Trapeze" <?php if($degree_program == "Trapeze") echo ' selected="selected"' ?>>Trapeze</option>
-            <option value="Lion Taming" <?php if($degree_program == "Lion Taming") echo ' selected="selected"' ?>>Lion Taming</option>
-            <option value="Clowning" <?php if($degree_program == "Clowning") echo ' selected="selected"' ?>>Clowning</option>
-            <option value="Trick Riding" <?php if($degree_program == "Trick Riding") echo ' selected="selected"' ?>>Trick Riding</option>
+            <?php 
+            
+            if (isset($row['degree_program'])){
+                $degree_program = $row['degree_program'];
+            } else {
+                $degree_program = "";
+            }
+
+            // echo "{$row["degree_program"]}";
+            ?>
+            
+            <option value="Chainsaw Juggling" <?php if($degree_program == "Chainsaw Juggling") echo ' selected="selected"'?>>Chainsaw Juggling</option>
+            <option value="Trapeze" <?php if($degree_program == "Trapeze") echo ' selected="selected"'?>>Trapeze</option>
+            <option value="Lion Taming" <?php if($degree_program == "Lion Taming") echo ' selected="selected"'?>>Lion Taming</option>
+            <option value="Clowning" <?php if($degree_program == "Clowning") echo ' selected="selected"'?>>Clowning</option>
+            <option value="Trick Riding" <?php if($degree_program == "Trick Riding") echo ' selected="selected"'?>>Trick Riding</option>
         </select>
     </div>
     <br />
     <!-- added Graduation Date -->
-    <div class="form-group">
-    <label class="col-form-label pb-2" for="graduation_date">Graduation Date</label>
-    <br />
-    <input type="date" name="graduation_date" id="graduation_date" value="<?php $graduation_date = $_POST['graduation_date']; $date = date('Y-m-d H:i:s', strtotime($graduation_date)); echo (!empty($date) ? $date: ''); ?> ">
+      <div class="form-group mb-1">
+        <label class="col-form-label pb-2" for="graduation_date">Graduation Date</label>
+        <br />
+        <input type="date" name="graduation_date" id="graduation_date" value="<?php echo (isset($graduation_date) ? $graduation_date: '');?>">
     </div>
     <br />
     <label class="col-form-label" for="email">Email </label>
@@ -71,8 +84,12 @@ http://php.net/manual/en/language.operators.comparison.php#language.operators.co
     <label class="col-form-label" for="phone">Phone </label>
     <input class="form-control" type="text" id="phone" name="phone" value="<?php echo (isset($phone) ? $phone: '');?>">
     <br>
+
+    <!-- hidden input of id so we know which row we are working upon -->
     <input type="hidden" name="id" value="<?php echo (isset($id) ? $id : '');?>">
-    <input type="hidden" name="data_created" value="<?php echo (isset($data_created) ? $datacreated : ''); ?>">
+
+    <?php var_dump($row['degree_program']);?><br /><br />
+
     <a href="display-records.php">Cancel</a>&nbsp;&nbsp;
     <button class="btn btn-primary" type="submit">Save Record</button>
 
