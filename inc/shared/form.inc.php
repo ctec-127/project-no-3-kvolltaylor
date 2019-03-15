@@ -62,7 +62,7 @@ http://php.net/manual/en/language.operators.comparison.php#language.operators.co
 
             // echo "{$row["degree_program"]}";
             ?>
-            
+
             <option value="Chainsaw Juggling" <?php if($degree_program == "Chainsaw Juggling") echo ' selected="selected"'?>>Chainsaw Juggling</option>
             <option value="Trapeze" <?php if($degree_program == "Trapeze") echo ' selected="selected"'?>>Trapeze</option>
             <option value="Lion Taming" <?php if($degree_program == "Lion Taming") echo ' selected="selected"'?>>Lion Taming</option>
