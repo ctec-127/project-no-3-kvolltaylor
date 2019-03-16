@@ -14,7 +14,7 @@ require_once 'inc/app/config.inc.php';
         <div class="col-lg-12 mt-4">
         <?php 
             if ($_SERVER['REQUEST_METHOD'] == "POST") {
-                // if the search submit button was not submitted with no text, do this:
+                // if the search submit button was submitted with text, do this:
                 if(!empty($_POST['search'])){
                     // perform the search of the student table with the search string in the following columns for matching strings
                     // added gpa, financial aid, and degree program columns to include in the search
