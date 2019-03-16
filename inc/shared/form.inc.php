@@ -38,12 +38,26 @@ http://php.net/manual/en/language.operators.comparison.php#language.operators.co
         <?php 
         // echo (isset($financial_aid) ? $financial_aid: "");
         ?> 
+        <!-- BRUCE ADDED CODED BELOW -->
         <div class="form-check-inline">
+            <?php 
+                // echo 'FINANCIAL AID: ' . var_dump($financial_aid); # BRUCE DEBUG
+                if(isset($financial_aid)){ 
+                    if ($financial_aid == "1") {
+                        $checked = ' checked';
+                    } else if ($financial_aid == "0") {
+                        $checked = ' checked';
+                    }
+                } else {
+                    $checked = '';
+                }
+            ?>
         <!-- added in sticky value to echo out that that radio button option is checked if it was selected -->
-            <input class="form-check-input" type="radio" id="financial_aid_yes" name="financial_aid" value="1<?php echo (isset($financial_aid) ? $financial_aid: "");?>" <?php if ($financial_aid == "1") echo "checked";?>><label class="form-check-label" for="financial_aid_yes">Yes</label>
+        <!-- BRUCE REWORKED THESE RADIOS TOTALLY -->
+            <input class="form-check-input" type="radio" id="financial_aid_yes" name="financial_aid" value="1" <?=$checked;?><label class="form-check-label" for="financial_aid_yes">Yes</label>
         </div>
         <div class="form-check-inline">
-            <input class="form-check-input" type="radio" id="financial_aid_no" name="financial_aid" value="0<?php echo (isset($financial_aid) ? $financial_aid: "");?>" <?php if ($financial_aid == "0") echo "checked";?>><label class="form-check-label" for="financial_aid_no">No</label>
+            <input class="form-check-input" type="radio" id="financial_aid_no" name="financial_aid" value="0" <?=$checked;?>><label class="form-check-label" for="financial_aid_no">No</label>
         </div>
     </div>
     <br />
@@ -54,8 +68,8 @@ http://php.net/manual/en/language.operators.comparison.php#language.operators.co
         <!-- added in sticky value, using a check to see if is set, then to define the variable as that option if it is the one selected, or else to define variable as empty  -->
             <?php 
             
-            if (isset($row['degree_program'])){
-                $degree_program = $row['degree_program'];
+            if (isset($degree_program)){
+                $degree_program = $degree_program;
             } else {
                 $degree_program = "";
             }
@@ -88,7 +102,7 @@ http://php.net/manual/en/language.operators.comparison.php#language.operators.co
     <!-- hidden input of id so we know which row we are working upon -->
     <input type="hidden" name="id" value="<?php echo (isset($id) ? $id : '');?>">
 
-    <?php var_dump($row['degree_program']);?><br /><br />
+    <?php # var_dump($row['degree_program']);?><br /><br />
 
     <a href="display-records.php">Cancel</a>&nbsp;&nbsp;
     <button class="btn btn-primary" type="submit">Save Record</button>
