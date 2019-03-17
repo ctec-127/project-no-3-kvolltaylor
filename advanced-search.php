@@ -15,11 +15,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $last = $_POST['last'];
     $sid = $_POST['sid'];
     $gpa = $_POST['gpa'];
-    if (isset($_POST['financial_aid'])) {
-        $financial_aid = $_POST['financial_aid'];
-    } else {
-        $financial_aid = '';
-    }
+    // if (isset($_POST['financial_aid'])) {
+    //     $financial_aid = $_POST['financial_aid'];
+    // } else {
+    //     $financial_aid = '';
+    // }
+    $financial_aid = $_POST['financial_aid'];
     if (isset($_POST['degree_program'])) {
         $degree_program = $_POST['degree_program'];
     } else {
@@ -28,23 +29,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $graduation_date = $_POST['graduation_date'];
     $email = $_POST['email'];
     $phone = $_POST['phone'];
-
-    // variables to add to querry to seach within appropriate columns for user's entries
-    // variable to concatenate all the different field searches
-    // if (isset($first)) {
-    //     $first_search = 'first_name LIKE %$first%';
-    // } else {
-    //     $first_search = '';
-    // }
-    // $last_search = 'last_name LIKE %$last%';
-    // $sid_search = 'sid LIKE %$sid%';
-    // $gpa_search = 'gpa LIKE %$gpa%';
-    // $financial_aid_search = 'financial_aid LIKE %$financial_aid%';
-    // $degree_program_search = 'degree_program LIKE %$degree_program%';
-    // $graduation_date_search = 'graduation_date LIKE %$graduation_date%';
-    // $email_search = 'email LIKE %$email%';
-    // $phone_search = 'phone LIKE %$phone%';
-    // $advanced_search = $first_search." AND ".$last_search." AND ".$sid_search." AND ".$gpa_search." AND ".$financial_aid_search."AND ".$degree_program_search."AND ".$graduation_date_search."AND ".$email_search."AND ".$phone_search;
 }
 
 ?>
