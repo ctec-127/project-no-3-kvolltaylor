@@ -15,12 +15,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $last = $_POST['last'];
     $sid = $_POST['sid'];
     $gpa = $_POST['gpa'];
-    // if (isset($_POST['financial_aid'])) {
-    //     $financial_aid = $_POST['financial_aid'];
-    // } else {
-    //     $financial_aid = '';
-    // }
-    $financial_aid = $_POST['financial_aid'];
+    if (isset($_POST['financial_aid'])) {
+        $financial_aid = $_POST['financial_aid'];
+    } else {
+        $financial_aid = '';
+    }
+    // $financial_aid = $_POST['financial_aid'];
     if (isset($_POST['degree_program'])) {
         $degree_program = $_POST['degree_program'];
     } else {
@@ -39,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		<div class="col-lg-12">
 			<h1>Advanced Record Search</h1>
             <div class="p-2">
-                 <div class="row">
+                <div class="row">
                     <div class="col-lg-12 mt-4">
                         <!-- created advanced search form for users to search within fields-->
                         <!-- made form sticky, so it shows what was entered by user when results from search are displayed -->
@@ -61,35 +61,35 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                     </div> <!-- end div for 3rd column -->
                                 </div> <!-- end div for first row -->
                                 <div class="row mb-3">
-                                <div class="col col-md-2">
+                                    <div class="col col-md-2">
                                         <label for="gpa">GPA </label>
                                         <input class="form-control" type="text" id="gpa" name="gpa" value="<?php echo (isset($gpa) ? $gpa: '');?>">
                                     </div> <!-- end div for 1st column -->
                                     <div class="col col-md-2">
-                                        <label>Financial Aid</label>
-                                        <br>
-                                        <?php 
-                                            if(isset($financial_aid)){ 
-                                                if ($financial_aid == "1") {
-                                                    $checked_y = ' checked';
-                                                    $checked_n = '';
-                                                } else if ($financial_aid == "0") {
-                                                    $checked_n = ' checked';
+                                            <label>Financial Aid</label>
+                                            <br>
+                                            <?php 
+                                                if(isset($financial_aid)){ 
+                                                    if ($financial_aid == 1) {
+                                                        $checked_y = ' checked';
+                                                        $checked_n = '';
+                                                    } else if ($financial_aid == 0) {
+                                                        $checked_n = ' checked';
+                                                        $checked_y = '';
+                                                    }
+                                                } 
+                                                if (!isset($financial_aid)){
+                                                    $financial_aid = '';
                                                     $checked_y = '';
+                                                    $checked_n = '';
                                                 }
-                                            } 
-                                            if (!isset($financial_aid)){
-                                                $financial_aid = '';
-                                                $checked_y = '';
-                                                $checked_n = '';
-                                            }
-                                        ?>
-                                        <div class="form-check-inline">
-                                            <input class="form-check-input" type="radio" id="financial_aid_yes" name="financial_aid" value="1" <?php echo $checked_y;?>><label class="form-check-label" for="financial_aid_yes">Yes</label>
-                                        </div>
-                                        <div class="form-check-inline">
-                                            <input class="form-check-input" type="radio" id="financial_aid_no" name="financial_aid" value="0" <?php echo $checked_n;?>><label class="form-check-label" for="financial_aid_no">No</label>
-                                        </div> 
+                                            ?>
+                                            <div class="form-check-inline">
+                                                <input class="form-check-input" type="radio" id="financial_aid_yes" name="financial_aid" value="1" <?php echo $checked_y;?>><label class="form-check-label" for="financial_aid_yes">Yes</label>
+                                            </div>
+                                            <div class="form-check-inline">
+                                                <input class="form-check-input" type="radio" id="financial_aid_no" name="financial_aid" value="0" <?php echo $checked_n;?>><label class="form-check-label" for="financial_aid_no">No</label>
+                                            </div> 
                                     </div><!-- end div for 2nd column -->
                                     <div class="col col-md-4">
                                         <label for="degree_program">Degree Program</label>
@@ -102,18 +102,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                             }
                                         ?>
                                             <option hidden disabled selected value> - select an option - </option>
-                                            <option value="Chainsaw Juggling<?php if($degree_program == "Chainsaw Juggling") echo ' selected="selected"'?>">Chainsaw Juggling</option>
-                                            <option value="Trapeze<?php if($degree_program == "Trapeze") echo ' selected="selected"'?>">Trapeze</option>
-                                            <option value="Lion Taming<?php if($degree_program == "Lion Taming") echo ' selected="selected"'?>">Lion Taming</option>
-                                            <option value="Clowning<?php if($degree_program == "Clowning") echo ' selected="selected"'?>">Clowning</option>
-                                            <option value="Trick Riding<?php if($degree_program == "Trick Riding") echo ' selected="selected"'?>">Trick Riding</option>
+                                            <option value="Chainsaw Juggling"<?php if($degree_program == "Chainsaw Juggling") echo ' selected="selected"'?>>Chainsaw Juggling</option>
+                                            <option value="Trapeze"<?php if($degree_program == "Trapeze") echo ' selected="selected"'?>>Trapeze</option>
+                                            <option value="Lion Taming"<?php if($degree_program == "Lion Taming") echo ' selected="selected"'?>>Lion Taming</option>
+                                            <option value="Clowning"<?php if($degree_program == "Clowning") echo ' selected="selected"'?>>Clowning</option>
+                                            <option value="Trick Riding"<?php if($degree_program == "Trick Riding") echo ' selected="selected"'?>>Trick Riding</option>
                                         </select>
                                     </div> <!-- end div for 3rd column -->
-                                    <div class="col col-md-4">
-                                        <label for="graduation_date">Graduation Date</label>
-                                        <br>
-                                        <input type="date" class="rounded py-1 pl-3" name="graduation_date" id="graduation_date" value="<?php echo (isset($graduation_date) ? $graduation_date: '');?>">
-                                    </div> <!-- end div for 4th column -->
+                                        <div class="col col-md-4">
+                                            <label for="graduation_date">Graduation Date</label>
+                                            <br>
+                                            <input type="date" class="rounded py-1 pl-3" name="graduation_date" id="graduation_date" value="<?php echo (isset($graduation_date) ? $graduation_date: '');?>">
+                                        </div> <!-- end div for 4th column -->
                                 </div> <!-- end div for second row -->
                                 <div class="row">
                                     <div class="col col-md-4">
@@ -133,9 +133,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 </div> <!-- end div for third row -->
                             </fieldset>
                         </form>
-                    </div> <!-- end div -->
+                    </div> <!-- end div with col-lg-12 mt-4 -->
                 </div> <!-- end row -->
-            </div> <!-- end div with border -->
+            </div> <!-- end div with p-2 -->
 
 
             <?php 
@@ -186,9 +186,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     //FINANCIAL AID
                     if (!empty($financial_aid)){
                         if ($sql == "SELECT * from $db_table WHERE") {
-                            $sql .= " financial_aid = '$financial_aid'";
+                            $sql .= " financial_aid = $financial_aid";
                         } else {
-                            $sql .= " OR financial_aid = '$financial_aid'";
+                            $sql .= " OR financial_aid = $financial_aid";
                         }
                     } else {
                         $sql = $sql;
@@ -308,9 +308,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     //FINANCIAL AID
                     if (!empty($financial_aid)){
                         if ($sql == "SELECT * from $db_table WHERE") {
-                            $sql .= " financial_aid = '$financial_aid'";
+                            $sql .= " financial_aid = $financial_aid";
                         } else {
-                            $sql .= " AND financial_aid = '$financial_aid'";
+                            $sql .= " AND financial_aid = $financial_aid";
                         }
                     } else {
                         $sql = $sql;
@@ -318,9 +318,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     //DEGREE PROGRAM
                     if (!empty($degree_program)){
                         if ($sql == "SELECT * from $db_table WHERE") {
-                            $sql .= " degree_program = '$degree_program'";
+                            $sql .= " degree_program LIKE '$degree_program'";
                         } else {
-                            $sql .= " AND degree_program = '$degree_program'";
+                            $sql .= " AND degree_program LIKE '$degree_program'";
                         }
                     } else {
                         $sql = $sql;
