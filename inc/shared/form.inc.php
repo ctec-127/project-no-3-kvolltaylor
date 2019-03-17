@@ -39,25 +39,33 @@ http://php.net/manual/en/language.operators.comparison.php#language.operators.co
         // echo (isset($financial_aid) ? $financial_aid: "");
         ?> 
         <!-- BRUCE ADDED CODED BELOW -->
+        <!-- changed Bruce's code so rather than one variable named checked, will use two
+        different variables with different values depending on value to echo out in the sticky form-->
         <div class="form-check-inline">
             <?php 
                 // echo 'FINANCIAL AID: ' . var_dump($financial_aid); # BRUCE DEBUG
+                // added $checked_y and $checked_n to logic so variable $checked won't echo twice
                 if(isset($financial_aid)){ 
                     if ($financial_aid == "1") {
-                        $checked = ' checked';
+                        // $checked = ' checked';
+                        $checked_y = ' checked';
+                        $checked_n = '';
                     } else if ($financial_aid == "0") {
-                        $checked = ' checked';
+                        // $checked = ' checked';
+                        $checked_n = ' checked';
+                        $checked_y = '';
                     }
                 } else {
-                    $checked = '';
+                    $checked_y = '';
+                    $checked_n = '';
                 }
             ?>
         <!-- added in sticky value to echo out that that radio button option is checked if it was selected -->
         <!-- BRUCE REWORKED THESE RADIOS TOTALLY -->
-            <input class="form-check-input" type="radio" id="financial_aid_yes" name="financial_aid" value="1" <?=$checked;?>><label class="form-check-label" for="financial_aid_yes">Yes</label>
+            <input class="form-check-input" type="radio" id="financial_aid_yes" name="financial_aid" value="1" <?=$checked_y?>><label class="form-check-label" for="financial_aid_yes">Yes</label>
         </div>
         <div class="form-check-inline">
-            <input class="form-check-input" type="radio" id="financial_aid_no" name="financial_aid" value="0" <?=$checked;?>><label class="form-check-label" for="financial_aid_no">No</label>
+            <input class="form-check-input" type="radio" id="financial_aid_no" name="financial_aid" value="0" <?=$checked_n;?>><label class="form-check-label" for="financial_aid_no">No</label>
         </div>
     </div>
     <br />

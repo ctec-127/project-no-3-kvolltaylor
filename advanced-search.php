@@ -19,7 +19,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $financial_aid = $_POST['financial_aid'];
     } else {
         $financial_aid = '';
-        $checked = NULL;
     }
     if (isset($_POST['degree_program'])) {
         $degree_program = $_POST['degree_program'];
@@ -79,31 +78,33 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 </div> <!-- end div for first row -->
                                 <div class="row mb-3">
                                 <div class="col col-md-2">
-                                        <label class="" for="gpa">GPA </label>
+                                        <label for="gpa">GPA </label>
                                         <input class="form-control" type="text" id="gpa" name="gpa" value="<?php echo (isset($gpa) ? $gpa: '');?>">
                                     </div> <!-- end div for 1st column -->
                                     <div class="col col-md-2">
-                                        <label class="" for="financial_aid">Financial Aid</label>
+                                        <label>Financial Aid</label>
                                         <br>
                                         <?php 
                                             if(isset($financial_aid)){ 
                                                 if ($financial_aid == "1") {
-                                                    $checked = ' checked';
+                                                    $checked_y = ' checked';
+                                                    $checked_n = '';
                                                 } else if ($financial_aid == "0") {
-                                                    $checked = ' checked';
+                                                    $checked_n = ' checked';
+                                                    $checked_y = '';
                                                 }
-                                            } else {
-                                                $checked = '';
-                                            }
+                                            } 
                                             if (!isset($financial_aid)){
-                                                $checked = '';
+                                                $financial_aid = '';
+                                                $checked_y = '';
+                                                $checked_n = '';
                                             }
                                         ?>
                                         <div class="form-check-inline">
-                                            <input class="form-check-input" type="radio" id="financial_aid_yes" name="financial_aid" value="1" <?php echo $checked;?>><label class="form-check-label" for="financial_aid_yes">Yes</label>
+                                            <input class="form-check-input" type="radio" id="financial_aid_yes" name="financial_aid" value="1" <?php echo $checked_y;?>><label class="form-check-label" for="financial_aid_yes">Yes</label>
                                         </div>
                                         <div class="form-check-inline">
-                                            <input class="form-check-input" type="radio" id="financial_aid_no" name="financial_aid" value="0" <?php echo $checked;?>><label class="form-check-label" for="financial_aid_no">No</label>
+                                            <input class="form-check-input" type="radio" id="financial_aid_no" name="financial_aid" value="0" <?php echo $checked_n;?>><label class="form-check-label" for="financial_aid_no">No</label>
                                         </div> 
                                     </div><!-- end div for 2nd column -->
                                     <div class="col col-md-4">
@@ -125,25 +126,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                         </select>
                                     </div> <!-- end div for 3rd column -->
                                     <div class="col col-md-4">
-                                        <label for="gd">Graduation Date</label>
+                                        <label for="graduation_date">Graduation Date</label>
                                         <br>
                                         <input type="date" class="rounded py-1 pl-3" name="graduation_date" id="graduation_date" value="<?php echo (isset($graduation_date) ? $graduation_date: '');?>">
                                     </div> <!-- end div for 4th column -->
                                 </div> <!-- end div for second row -->
                                 <div class="row">
                                     <div class="col col-md-4">
-                                        <label class="" for="email">Email </label>
+                                        <label for="email">Email </label>
                                         <input class="form-control" type="text" id="email" name="email" value="<?php echo (isset($email) ? $email: '');?>">
                                     </div> <!-- end div for 1st column -->
                                     <div class="$col col-md-4">
-                                        <label class="" for="phone">Phone </label>
+                                        <label for="phone">Phone </label>
                                         <input class="form-control" type="text" id="phone" name="phone" value="<?php echo (isset($phone) ? $phone: '');?>">
                                     </div> <!-- end div for 2nd column -->
                                     <div class="col col-md-2">
-                                        <button class="btn btn-block btn-info p-2 mt-4" type="submit" value="Search Any Fields" name="search_any" title="Click Search Any Fields">Search <strong>Any</strong> Field</button>
+                                        <button class="btn btn-block btn-info p-2 mt-4" type="submit" value="Search In Any Fields" name="search_any" title="Click Search Any Fields">Search For <strong>Any</strong></button>
                                     </div> <!-- end div for 3rd column -->
                                     <div class="col col-md-2">
-                                        <button class="btn btn-block btn-success p-2 mt-4" type="submit" value="Search All Fields" name="search_all" title="Click Search All Fields">Search <strong>All</strong> Fields</button>
+                                        <button class="btn btn-block btn-success p-2 mt-4" type="submit" value="Search For All Fields" name="search_all" title="Click Search All Fields">Search For <strong>All</strong></button>
                                     </div> <!-- end div for 4th column -->
                                 </div> <!-- end div for third row -->
                             </fieldset>
