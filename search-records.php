@@ -29,7 +29,7 @@ require_once 'inc/app/config.inc.php';
                     if ($result->num_rows == 0) {
                         echo "<p class=\"display-4 mt-4 text-center\">No results found for \"<strong>{$_POST['search']}</strong>\"</p>";
                         echo '<img class="mx-auto d-block mt-4" src="img/frown.png" alt="A sad face">';
-                        echo "<p class=\"display-4 mt-4 text-center\">Please try again.</p>";
+                        echo "<p class=\"display-4 mt-4 text-center\">Try performing an <a href=\"advanced-search.php\">advanced search</a>.</p>";
                         // echo "<h2 class=\"mt-4\">There are currently no records to display for <strong>last names</strong> starting with <strong>$filter</strong></h2>";
                     // if the search of the student table yielded matches, display them
                     } else {
