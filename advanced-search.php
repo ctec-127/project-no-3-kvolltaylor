@@ -10,15 +10,42 @@ require_once 'inc/app/config.inc.php';
 
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // variables for sticky form to show what user has searched for
     $first = $_POST['first'];
     $last = $_POST['last'];
     $sid = $_POST['sid'];
     $gpa = $_POST['gpa'];
-    $financial_aid = $_POST['financial_aid'];
-    $degree_program = $_POST['degree_program'];
+    if (isset($_POST['financial_aid'])) {
+        $financial_aid = $_POST['financial_aid'];
+    } else {
+        $financial_aid = '';
+        $checked = NULL;
+    }
+    if (isset($_POST['degree_program'])) {
+        $degree_program = $_POST['degree_program'];
+    } else {
+        $degree_program = '';
+    }
     $graduation_date = $_POST['graduation_date'];
     $email = $_POST['email'];
     $phone = $_POST['phone'];
+
+    // variables to add to querry to seach within appropriate columns for user's entries
+    // variable to concatenate all the different field searches
+    // if (isset($first)) {
+    //     $first_search = 'first_name LIKE %$first%';
+    // } else {
+    //     $first_search = '';
+    // }
+    // $last_search = 'last_name LIKE %$last%';
+    // $sid_search = 'sid LIKE %$sid%';
+    // $gpa_search = 'gpa LIKE %$gpa%';
+    // $financial_aid_search = 'financial_aid LIKE %$financial_aid%';
+    // $degree_program_search = 'degree_program LIKE %$degree_program%';
+    // $graduation_date_search = 'graduation_date LIKE %$graduation_date%';
+    // $email_search = 'email LIKE %$email%';
+    // $phone_search = 'phone LIKE %$phone%';
+    // $advanced_search = $first_search." AND ".$last_search." AND ".$sid_search." AND ".$gpa_search." AND ".$financial_aid_search."AND ".$degree_program_search."AND ".$graduation_date_search."AND ".$email_search."AND ".$phone_search;
 }
 
 ?>
@@ -31,7 +58,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <div class="p-2">
                  <div class="row">
                     <div class="col-lg-12 mt-4">
-                        <form id="adv_search" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" method="POST">
+                        <!-- created advanced search form for users to search within fields-->
+                        <!-- made form sticky, so it shows what was entered by user when results from search are displayed -->
+                        <form id="advanced_search" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" method="POST">
                             <fieldset class=" border border-success rounded p-2">
                                 <legend class="w-auto ml-2">Enter terms into the desired fields:</legend>
                                 <div class="row mb-3">
@@ -56,16 +85,38 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                     <div class="col col-md-2">
                                         <label class="" for="financial_aid">Financial Aid</label>
                                         <br>
+                                        <?php 
+                                            if(isset($financial_aid)){ 
+                                                if ($financial_aid == "1") {
+                                                    $checked = ' checked';
+                                                } else if ($financial_aid == "0") {
+                                                    $checked = ' checked';
+                                                }
+                                            } else {
+                                                $checked = '';
+                                            }
+                                            if (!isset($financial_aid)){
+                                                $checked = '';
+                                            }
+                                        ?>
                                         <div class="form-check-inline">
-                                            <input class="form-check-input" type="radio" id="financial_aid_yes" name="financial_aid" value="1" <?php if ($financial_aid == "1") echo " checked";?>><label class="form-check-label" for="financial_aid_yes">Yes</label>
+                                            <input class="form-check-input" type="radio" id="financial_aid_yes" name="financial_aid" value="1" <?php echo $checked;?>><label class="form-check-label" for="financial_aid_yes">Yes</label>
                                         </div>
                                         <div class="form-check-inline">
-                                            <input class="form-check-input" type="radio" id="financial_aid_no" name="financial_aid" value="0" <?php if ($financial_aid == "0") echo " checked";?>><label class="form-check-label" for="financial_aid_no">No</label>
+                                            <input class="form-check-input" type="radio" id="financial_aid_no" name="financial_aid" value="0" <?php echo $checked;?>><label class="form-check-label" for="financial_aid_no">No</label>
                                         </div> 
                                     </div><!-- end div for 2nd column -->
                                     <div class="col col-md-4">
                                         <label for="degree_program">Degree Program</label>
                                         <select class="form-control" name="degree_program" id="degree_program">
+                                        <?php 
+                                            if (isset($degree_program)){
+                                                $degree_program = $degree_program;
+                                            } else {
+                                                $degree_program = "";
+                                            }
+                                        ?>
+                                            <option hidden disabled selected value> - select an option - </option>
                                             <option value="Chainsaw Juggling<?php if($degree_program == "Chainsaw Juggling") echo ' selected="selected"'?>">Chainsaw Juggling</option>
                                             <option value="Trapeze<?php if($degree_program == "Trapeze") echo ' selected="selected"'?>">Trapeze</option>
                                             <option value="Lion Taming<?php if($degree_program == "Lion Taming") echo ' selected="selected"'?>">Lion Taming</option>
@@ -88,9 +139,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                         <label class="" for="phone">Phone </label>
                                         <input class="form-control" type="text" id="phone" name="phone" value="<?php echo (isset($phone) ? $phone: '');?>">
                                     </div> <!-- end div for 2nd column -->
-                                    <div class="col col-md-4">
-                                        <button class="btn btn-block btn-primary p-2 mt-4" type="submit" value="Advanced Search" name="adv_search" title="Click Advanced Search">Advanced Search</button>
+                                    <div class="col col-md-2">
+                                        <button class="btn btn-block btn-primary p-2 mt-4" type="submit" value="Search Any Fields" name="search_any" title="Click Search Any Fields">Search Any Fields</button>
                                     </div> <!-- end div for 3rd column -->
+                                    <div class="col col-md-2">
+                                        <button class="btn btn-block btn-primary p-2 mt-4" type="submit" value="Search All Fields" name="search_all" title="Click Search All Fields">Search All Fields</button>
+                                    </div> <!-- end div for 4th column -->
                                 </div> <!-- end div for third row -->
                             </fieldset>
                         </form>
@@ -102,7 +156,251 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <?php 
             
             if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            }
+
+                // SEARCH ANY
+                if(!empty($_POST['search_any'])){
+                    // $sql = "SELECT * FROM $db_table WHERE ".$advanced_search." ORDER BY last_name ASC";
+                    $sql = "SELECT * from $db_table WHERE";
+                    
+                    //FIRST
+                    if(!empty($first)){
+                        $sql .= " first_name LIKE '$first'";
+                    } else {
+                        $sql = $sql;
+                    }
+                    //LAST
+                    if (!empty($last)){
+                        if ($sql == "SELECT * from $db_table WHERE") {
+                            $sql .= " last_name LIKE '$last'";
+                        } else {
+                            $sql .= " OR last_name LIKE '$last'";
+                        }
+                    } else {
+                        $sql = $sql;
+                    }
+                    //STUDENT ID
+                    if (!empty($sid)){
+                        if ($sql == "SELECT * from $db_table WHERE") {
+                            $sql .= " sid LIKE '$sid'";
+                        } else {
+                            $sql .= " OR sid LIKE '$sid'";
+                        }
+                    } else {
+                        $sql = $sql;
+                    }
+                    //GPA
+                    if (!empty($gpa)){
+                        if ($sql == "SELECT * from $db_table WHERE") {
+                            $sql .= " gpa LIKE '$gpa'";
+                        } else {
+                            $sql .= " OR gpa LIKE '$gpa'";
+                        }
+                    } else {
+                        $sql = $sql;
+                    }
+                    //FINANCIAL AID
+                    if (!empty($financial_aid)){
+                        if ($sql == "SELECT * from $db_table WHERE") {
+                            $sql .= " financial_aid = '$financial_aid'";
+                        } else {
+                            $sql .= " OR financial_aid = '$financial_aid'";
+                        }
+                    } else {
+                        $sql = $sql;
+                    }
+                    //DEGREE PROGRAM
+                    if (!empty($degree_program)){
+                        if ($sql == "SELECT * from $db_table WHERE") {
+                            $sql .= " degree_program = '$degree_program'";
+                        } else {
+                            $sql .= " OR degree_program = '$degree_program'";
+                        }
+                    } else {
+                        $sql = $sql;
+                    }
+                    //GRADUATION DATE
+                    if (!empty($graduation_date)){
+                        if ($sql == "SELECT * from $db_table WHERE") {
+                            $sql .= " graduation_date = '$graduation_date'";
+                        } else {
+                            $sql .= " OR graduation_date = '$graduation_date'";
+                        }
+                    } else {
+                        $sql = $sql;
+                    }
+                    //EMAIL
+                    if (!empty($email)){
+                        if ($sql == "SELECT * from $db_table WHERE") {
+                            $sql .= " email LIKE '$email'";
+                        } else {
+                            $sql .= " OR email LIKE '$email'";
+                        }
+                    } else {
+                        $sql = $sql;
+                    }
+                    //PHONE
+                    if (!empty($phone)){
+                        if ($sql == "SELECT * from $db_table WHERE") {
+                            $sql .= " phone LIKE '$phone'";
+                        } else {
+                            $sql .= " OR phone LIKE '$phone'";
+                        }
+                    } else {
+                        $sql = $sql;
+                    }
+                    //ADD FINAL CONCATENATION TO STRING TO ADD ORDERING
+                    $sql .= " ORDER by last_name ASC";
+                    $result = $db->query($sql);
+
+                    //DISPLAY THE RESULTS
+                    if ($sql != "SELECT * from $db_table WHERE ORDER by last_name ASC"){
+                        if ($result->num_rows == 0) {
+                            echo "<p class=\"display-4 mt-4 text-center\">No results found for your search</p>";
+                            echo '<img class="mx-auto d-block mt-4" src="img/frown.png" alt="A sad face">';
+                            echo "<p class=\"display-4 mt-4 text-center\">Please try again.</p>";
+                            // echo "<h2 class=\"mt-4\">There are currently no records to display for <strong>last names</strong> starting with <strong>$filter</strong></h2>";
+                        // if the search of the student table yielded matches, display them
+                        } else {
+                            echo "<h2 class=\"mt-4 text-center\">$result->num_rows record(s) found for your search </h2>";
+                            display_record_table($result);
+                        }
+                    } // end if sql variable does not contain columns to search
+                    // if the search submit button was submitted with no text, do this:
+                    elseif ($sql == "SELECT * from $db_table WHERE ORDER by last_name ASC"){
+                        echo "<p class=\"display-4 mt-4 text-center\">I can't search if you don't give<br>me something to search for.</p>";
+                        echo '<img class="mx-auto d-block mt-4" src="img/nosmile.png" alt="A face with no smile">';
+                    } // end if sql variable contains no columns to search
+                } 
+                // elseif (empty($_POST['search_any'])){
+                //     if (empty($_POST['search_all'])) {
+                //         echo "<p class=\"display-4 mt-4 text-center\">I can't search if you don't give<br>me something to search for.</p>";
+                //         echo '<img class="mx-auto d-block mt-4" src="img/nosmile.png" alt="A face with no smile">';
+                //     } // end if serach all empty
+                // } // end if empty
+
+
+                //SEARCH ALL
+                if(!empty($_POST['search_all'])){
+                    // $sql = "SELECT * FROM $db_table WHERE ".$advanced_search." ORDER BY last_name ASC";
+                    $sql = "SELECT * from $db_table WHERE";
+                    
+                    //FIRST
+                    if(!empty($first)){
+                        $sql .= " first_name LIKE '$first'";
+                    } else {
+                        $sql = $sql;
+                    }
+                    //LAST
+                    if (!empty($last)){
+                        if ($sql == "SELECT * from $db_table WHERE") {
+                            $sql .= " last_name LIKE '$last'";
+                        } else {
+                            $sql .= " AND last_name LIKE '$last'";
+                        }
+                    } else {
+                        $sql = $sql;
+                    }
+                    //STUDENT ID
+                    if (!empty($sid)){
+                        if ($sql == "SELECT * from $db_table WHERE") {
+                            $sql .= " sid LIKE '$sid'";
+                        } else {
+                            $sql .= " AND sid LIKE '$sid'";
+                        }
+                    } else {
+                        $sql = $sql;
+                    }
+                    //GPA
+                    if (!empty($gpa)){
+                        if ($sql == "SELECT * from $db_table WHERE") {
+                            $sql .= " gpa LIKE '$gpa'";
+                        } else {
+                            $sql .= " AND gpa LIKE '$gpa'";
+                        }
+                    } else {
+                        $sql = $sql;
+                    }
+                    //FINANCIAL AID
+                    if (!empty($financial_aid)){
+                        if ($sql == "SELECT * from $db_table WHERE") {
+                            $sql .= " financial_aid = '$financial_aid'";
+                        } else {
+                            $sql .= " AND financial_aid = '$financial_aid'";
+                        }
+                    } else {
+                        $sql = $sql;
+                    }
+                    //DEGREE PROGRAM
+                    if (!empty($degree_program)){
+                        if ($sql == "SELECT * from $db_table WHERE") {
+                            $sql .= " degree_program = '$degree_program'";
+                        } else {
+                            $sql .= " AND degree_program = '$degree_program'";
+                        }
+                    } else {
+                        $sql = $sql;
+                    }
+                    //GRADUATION DATE
+                    if (!empty($graduation_date)){
+                        if ($sql == "SELECT * from $db_table WHERE") {
+                            $sql .= " graduation_date = '$graduation_date'";
+                        } else {
+                            $sql .= " AND graduation_date = '$graduation_date'";
+                        }
+                    } else {
+                        $sql = $sql;
+                    }
+                    //EMAIL
+                    if (!empty($email)){
+                        if ($sql == "SELECT * from $db_table WHERE") {
+                            $sql .= " email LIKE '$email'";
+                        } else {
+                            $sql .= " AND email LIKE '$email'";
+                        }
+                    } else {
+                        $sql = $sql;
+                    }
+                    //PHONE
+                    if (!empty($phone)){
+                        if ($sql == "SELECT * from $db_table WHERE") {
+                            $sql .= " phone LIKE '$phone'";
+                        } else {
+                            $sql .= " AND phone LIKE '$phone'";
+                        }
+                    } else {
+                        $sql = $sql;
+                    }
+                    //ADD FINAL CONCATENATION TO STRING TO ADD ORDERING
+                    $sql .= " ORDER by last_name ASC";
+                    $result = $db->query($sql);
+
+                    //DISPLAY THE RESULTS
+                    if ($sql != "SELECT * from $db_table WHERE ORDER by last_name ASC"){
+                        if ($result->num_rows == 0) {
+                            echo "<p class=\"display-4 mt-4 text-center\">No results found for your search</p>";
+                            echo '<img class="mx-auto d-block mt-4" src="img/frown.png" alt="A sad face">';
+                            echo "<p class=\"display-4 mt-4 text-center\">Please try again.</p>";
+                            // echo "<h2 class=\"mt-4\">There are currently no records to display for <strong>last names</strong> starting with <strong>$filter</strong></h2>";
+                        // if the search of the student table yielded matches, display them
+                        } else {
+                            echo "<h2 class=\"mt-4 text-center\">$result->num_rows record(s) found for your search </h2>";
+                            display_record_table($result);
+                        }
+                    } // end if sql variable contains columns to search but no data
+                    // if the search submit button was submitted with no text, do this:
+                    elseif ($sql == "SELECT * from $db_table WHERE ORDER by last_name ASC"){
+                        echo "<p class=\"display-4 mt-4 text-center\">I can't search if you don't give<br>me something to search for.</p>";
+                        echo '<img class="mx-auto d-block mt-4" src="img/nosmile.png" alt="A face with no smile">';
+                    } // end if sql variable contains no columns to search
+                } 
+                // elseif (empty($_POST['search_all'])){
+                //     if (empty ($_POST['search_any'])) {
+                //         echo "<p class=\"display-4 mt-4 text-center\">I can't search if you don't give<br>me something to search for.</p>";
+                //         echo '<img class="mx-auto d-block mt-4" src="img/nosmile.png" alt="A face with no smile">';
+                //     } //end if search any empty
+                // } // end if empty
+
+            } // end if server method equals post
 
             ?>
 

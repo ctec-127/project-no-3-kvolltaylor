@@ -54,7 +54,7 @@ http://php.net/manual/en/language.operators.comparison.php#language.operators.co
             ?>
         <!-- added in sticky value to echo out that that radio button option is checked if it was selected -->
         <!-- BRUCE REWORKED THESE RADIOS TOTALLY -->
-            <input class="form-check-input" type="radio" id="financial_aid_yes" name="financial_aid" value="1" <?=$checked;?><label class="form-check-label" for="financial_aid_yes">Yes</label>
+            <input class="form-check-input" type="radio" id="financial_aid_yes" name="financial_aid" value="1" <?=$checked;?>><label class="form-check-label" for="financial_aid_yes">Yes</label>
         </div>
         <div class="form-check-inline">
             <input class="form-check-input" type="radio" id="financial_aid_no" name="financial_aid" value="0" <?=$checked;?>><label class="form-check-label" for="financial_aid_no">No</label>
@@ -77,6 +77,7 @@ http://php.net/manual/en/language.operators.comparison.php#language.operators.co
             // echo "{$row["degree_program"]}";
             ?>
 
+            <option hidden disabled selected value> - select an option - </option>
             <option value="Chainsaw Juggling" <?php if($degree_program == "Chainsaw Juggling") echo ' selected="selected"'?>>Chainsaw Juggling</option>
             <option value="Trapeze" <?php if($degree_program == "Trapeze") echo ' selected="selected"'?>>Trapeze</option>
             <option value="Lion Taming" <?php if($degree_program == "Lion Taming") echo ' selected="selected"'?>>Lion Taming</option>

@@ -11,7 +11,7 @@
       <li class="nav-item <?=echoActiveClassIfRequestMatches("display-records");?>">
         <a class="nav-link" href="display-records.php">Home <span class="sr-only">(current)</span></a>
       </li>
-      <li class="nav-item <?= echoActiveClassIfRequestMatches("create-record");?>"">
+      <li class="nav-item <?= echoActiveClassIfRequestMatches("create-record");?>">
         <a class="nav-link" href="create-record.php">Create Record</a>
       </li>
 
@@ -24,6 +24,12 @@
           <a class="dropdown-item" href="http://php.net">PHP.net</a>
           <a class="dropdown-item" href="https://getbootstrap.com">Bootstrap</a>
         </div>
+      </li>
+    </ul>
+    <ul class="navbar-nav ml-auto pr-3">
+          <!-- advanced search link -->
+          <li class="nav-item <?=echoActiveClassIfRequestMatches("advanced-search");?>">
+          <a class="nav-link" href="advanced-search.php">Advanced Search</a>
       </li>
     </ul>
     <!-- Call the search-records.php file function for the search form to display results if used-->
