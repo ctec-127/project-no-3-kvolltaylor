@@ -140,10 +140,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                         <input class="form-control" type="text" id="phone" name="phone" value="<?php echo (isset($phone) ? $phone: '');?>">
                                     </div> <!-- end div for 2nd column -->
                                     <div class="col col-md-2">
-                                        <button class="btn btn-block btn-primary p-2 mt-4" type="submit" value="Search Any Fields" name="search_any" title="Click Search Any Fields">Search Any Fields</button>
+                                        <button class="btn btn-block btn-info p-2 mt-4" type="submit" value="Search Any Fields" name="search_any" title="Click Search Any Fields">Search <strong>Any</strong> Field</button>
                                     </div> <!-- end div for 3rd column -->
                                     <div class="col col-md-2">
-                                        <button class="btn btn-block btn-primary p-2 mt-4" type="submit" value="Search All Fields" name="search_all" title="Click Search All Fields">Search All Fields</button>
+                                        <button class="btn btn-block btn-success p-2 mt-4" type="submit" value="Search All Fields" name="search_all" title="Click Search All Fields">Search <strong>All</strong> Fields</button>
                                     </div> <!-- end div for 4th column -->
                                 </div> <!-- end div for third row -->
                             </fieldset>
