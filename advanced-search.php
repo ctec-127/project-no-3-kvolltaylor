@@ -47,26 +47,26 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <form id="advanced_search" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" method="POST">
                             <fieldset class=" border border-success rounded p-2">
                                 <legend class="w-auto ml-2">Enter terms into the desired fields:</legend>
-                                <div class="row mb-3">
-                                    <div class="col col-md-4">
+                                <div class="row mb-3"> <!-- begin row 1 -->
+                                    <div class="col col-md-4"> <!-- begin row 1, column 1 -->
                                         <label for="first">First Name </label>
                                         <input class="form-control" type="text" id="first" name="first" value="<?php echo (isset($first) ? $first: '');?>">
                                     </div> <!-- end div for 1st column -->
-                                    <div class="col col-md-4">
+                                    <div class="col col-md-4"> <!-- begin row 1, column 2 -->
                                         <label for="last">Last Name </label>
                                         <input class="form-control" type="text" id="last" name="last" value="<?php echo (isset($last) ? $last: '');?>">
                                     </div> <!-- end div for 2nd column -->
-                                    <div class="col col-md-4">
+                                    <div class="col col-md-4"> <!-- begin row 1, column 3 -->
                                         <label for="sid">Student ID </label>
                                         <input class="form-control" type="text" id="sid" name="sid" value="<?php echo (isset($sid) ? $sid: '');?>">
                                     </div> <!-- end div for 3rd column -->
                                 </div> <!-- end div for first row -->
-                                <div class="row mb-3">
-                                    <div class="col col-md-2">
+                                <div class="row mb-3"> <!-- begin row 2 -->
+                                    <div class="col col-md-2"> <!-- begin row 2, column 1 -->
                                         <label for="gpa">GPA </label>
                                         <input class="form-control" type="text" id="gpa" name="gpa" value="<?php echo (isset($gpa) ? $gpa: '');?>">
                                     </div> <!-- end div for 1st column -->
-                                    <div class="col col-md-2">
+                                    <div class="col col-md-2"> <!-- begin row 2, column 2 -->
                                             <label>Financial Aid</label>
                                             <br>
                                             <?php 
@@ -74,13 +74,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                                     if ($financial_aid == 1) {
                                                         $checked_y = ' checked';
                                                         $checked_n = '';
-                                                    } else if ($financial_aid == 0) {
+                                                    } elseif ($financial_aid == 0) {
                                                         $checked_n = ' checked';
                                                         $checked_y = '';
                                                     }
-                                                } 
-                                                if (!isset($financial_aid)){
-                                                    $financial_aid = '';
+                                                } else {
+                                                    // $financial_aid = '';
                                                     $checked_y = '';
                                                     $checked_n = '';
                                                 }
@@ -92,7 +91,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                                 <input class="form-check-input" type="radio" id="financial_aid_no" name="financial_aid" value="0" <?php echo $checked_n;?>><label class="form-check-label" for="financial_aid_no">No</label>
                                             </div> 
                                     </div><!-- end div for 2nd column -->
-                                    <div class="col col-md-4">
+                                    <div class="col col-md-4"> <!-- begin row 2, column 3 -->
                                         <label for="degree_program">Degree Program</label>
                                         <select class="form-control" name="degree_program" id="degree_program">
                                         <?php 
@@ -110,25 +109,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                             <option value="Trick Riding"<?php if($degree_program == "Trick Riding") echo ' selected="selected"'?>>Trick Riding</option>
                                         </select>
                                     </div> <!-- end div for 3rd column -->
-                                        <div class="col col-md-4">
+                                        <div class="col col-md-4"> <!-- begin row 2, column 4 -->
                                             <label for="graduation_date">Graduation Date</label>
                                             <br>
                                             <input type="date" class="rounded py-1 pl-3" name="graduation_date" id="graduation_date" value="<?php echo (isset($graduation_date) ? $graduation_date: '');?>">
                                         </div> <!-- end div for 4th column -->
                                 </div> <!-- end div for second row -->
-                                <div class="row">
-                                    <div class="col col-md-4">
+                                <div class="row"> <!-- begin row 3 -->
+                                    <div class="col col-md-4"> <!-- begin row 3, column 1 -->
                                         <label for="email">Email </label>
                                         <input class="form-control" type="text" id="email" name="email" value="<?php echo (isset($email) ? $email: '');?>">
                                     </div> <!-- end div for 1st column -->
-                                    <div class="$col col-md-4">
+                                    <div class="$col col-md-4"> <!-- begin row 3, column 2 -->
                                         <label for="phone">Phone </label>
                                         <input class="form-control" type="text" id="phone" name="phone" value="<?php echo (isset($phone) ? $phone: '');?>">
                                     </div> <!-- end div for 2nd column -->
-                                    <div class="col col-md-2">
+                                    <div class="col col-md-2"> <!-- begin row 3, column 3 -->
                                         <button class="btn btn-block btn-info p-2 mt-4" type="submit" value="Search In Any Fields" name="search_any" title="Click Search Any Fields">Search For <strong>Any</strong></button>
                                     </div> <!-- end div for 3rd column -->
-                                    <div class="col col-md-2">
+                                    <div class="col col-md-2"> <!-- begin row 3, column 4 -->
                                         <button class="btn btn-block btn-success p-2 mt-4" type="submit" value="Search For All Fields" name="search_all" title="Click Search All Fields">Search For <strong>All</strong></button>
                                     </div> <!-- end div for 4th column -->
                                 </div> <!-- end div for third row -->
@@ -167,9 +166,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     //STUDENT ID
                     if (!empty($sid)){
                         if ($sql == "SELECT * from $db_table WHERE") {
-                            $sql .= " sid LIKE '$sid'";
+                            $sql .= " sid = $sid";
                         } else {
-                            $sql .= " OR sid LIKE '$sid'";
+                            $sql .= " OR sid = $sid";
                         }
                     } else {
                         $sql = $sql;
@@ -177,15 +176,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     //GPA
                     if (!empty($gpa)){
                         if ($sql == "SELECT * from $db_table WHERE") {
-                            $sql .= " gpa LIKE '$gpa'";
+                            $sql .= " gpa = $gpa";
                         } else {
-                            $sql .= " OR gpa LIKE '$gpa'";
+                            $sql .= " OR gpa = $gpa";
                         }
                     } else {
                         $sql = $sql;
                     }
                     //FINANCIAL AID
-                    if (!empty($financial_aid)){
+                    if (isset($financial_aid)){
                         if ($sql == "SELECT * from $db_table WHERE") {
                             $sql .= " financial_aid = $financial_aid";
                         } else {
@@ -197,9 +196,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     //DEGREE PROGRAM
                     if (!empty($degree_program)){
                         if ($sql == "SELECT * from $db_table WHERE") {
-                            $sql .= " degree_program = '$degree_program'";
+                            $sql .= " degree_program LIKE '$degree_program'";
                         } else {
-                            $sql .= " OR degree_program = '$degree_program'";
+                            $sql .= " OR degree_program LIKE '$degree_program'";
                         }
                     } else {
                         $sql = $sql;
@@ -289,9 +288,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     //STUDENT ID
                     if (!empty($sid)){
                         if ($sql == "SELECT * from $db_table WHERE") {
-                            $sql .= " sid LIKE '$sid'";
+                            $sql .= " sid = $sid";
                         } else {
-                            $sql .= " AND sid LIKE '$sid'";
+                            $sql .= " AND sid = $sid";
                         }
                     } else {
                         $sql = $sql;
@@ -299,15 +298,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     //GPA
                     if (!empty($gpa)){
                         if ($sql == "SELECT * from $db_table WHERE") {
-                            $sql .= " gpa LIKE '$gpa'";
+                            $sql .= " gpa = $gpa";
                         } else {
-                            $sql .= " AND gpa LIKE '$gpa'";
+                            $sql .= " AND gpa = $gpa";
                         }
                     } else {
                         $sql = $sql;
                     }
                     //FINANCIAL AID
-                    if (!empty($financial_aid)){
+                    if (isset($financial_aid)){
                         if ($sql == "SELECT * from $db_table WHERE") {
                             $sql .= " financial_aid = $financial_aid";
                         } else {
@@ -356,6 +355,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     } else {
                         $sql = $sql;
                     }
+                    
                     //ADD FINAL CONCATENATION TO STRING TO ADD ORDERING
                     $sql .= " ORDER by last_name ASC";
                     $result = $db->query($sql);

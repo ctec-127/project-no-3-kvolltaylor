@@ -39,12 +39,12 @@ http://php.net/manual/en/language.operators.comparison.php#language.operators.co
         // echo (isset($financial_aid) ? $financial_aid: "");
         ?> 
         <!-- BRUCE ADDED CODED BELOW -->
-        <!-- changed Bruce's code so rather than one variable named checked, will use two
+        <!-- changed and fixed Bruce's code so rather than one variable named $checked, will use two
         different variables with different values depending on value to echo out in the sticky form-->
         <div class="form-check-inline">
             <?php 
                 // echo 'FINANCIAL AID: ' . var_dump($financial_aid); # BRUCE DEBUG
-                // added $checked_y and $checked_n to logic so variable $checked won't echo twice
+                // fixed by adding $checked_y and $checked_n to logic so variable $checked won't echo twice
                 if(isset($financial_aid)){ 
                     if ($financial_aid == "1") {
                         // $checked = ' checked';
@@ -62,6 +62,7 @@ http://php.net/manual/en/language.operators.comparison.php#language.operators.co
             ?>
         <!-- added in sticky value to echo out that that radio button option is checked if it was selected -->
         <!-- BRUCE REWORKED THESE RADIOS TOTALLY -->
+        <!-- changed Bruce's code to revise with the new, distinct variables rather than just the one -->
             <input class="form-check-input" type="radio" id="financial_aid_yes" name="financial_aid" value="1" <?=$checked_y?>><label class="form-check-label" for="financial_aid_yes">Yes</label>
         </div>
         <div class="form-check-inline">
@@ -71,8 +72,8 @@ http://php.net/manual/en/language.operators.comparison.php#language.operators.co
     <br />
     <!-- added Degree Program -->
     <div class="form-group mb-1">
-        <label class="col-form-label pt-1" for="dp">Degree Program</label>
-        <select class="form-control" name="degree_program" id="dp">
+        <label class="col-form-label pt-1" for="degree_program">Degree Program</label>
+        <select class="form-control" name="degree_program" id="degree_program">
         <!-- added in sticky value, using a check to see if is set, then to define the variable as that option if it is the one selected, or else to define variable as empty  -->
             <?php 
             
@@ -98,7 +99,7 @@ http://php.net/manual/en/language.operators.comparison.php#language.operators.co
       <div class="form-group mb-1">
         <label class="col-form-label pb-2" for="graduation_date">Graduation Date</label>
         <br />
-        <input type="date" name="graduation_date" id="graduation_date" value="<?php echo (isset($graduation_date) ? $graduation_date: '');?>">
+        <input type="date" name="graduation_date" id="graduation_date" class="rounded" value="<?php echo (isset($graduation_date) ? $graduation_date: '');?>">
     </div>
     <br />
     <label class="col-form-label" for="email">Email </label>
