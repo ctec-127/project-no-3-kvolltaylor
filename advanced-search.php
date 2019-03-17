@@ -17,9 +17,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $gpa = $_POST['gpa'];
     if (isset($_POST['financial_aid'])) {
         $financial_aid = $_POST['financial_aid'];
-    } else {
-        $financial_aid = '';
-    }
+    } 
+    // else {
+    //     $financial_aid = '';
+    // }
     // $financial_aid = $_POST['financial_aid'];
     if (isset($_POST['degree_program'])) {
         $degree_program = $_POST['degree_program'];
