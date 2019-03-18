@@ -39,14 +39,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <div class="row mt-5">
 		<div class="col-lg-12">
 			<h1>Advanced Record Search</h1>
-            <div class="p-2">
+            <div class="p-1">
                 <div class="row">
                     <div class="col-lg-12 mt-4">
                         <!-- created advanced search form for users to search within fields-->
                         <!-- made form sticky, so it shows what was entered by user when results from search are displayed -->
                         <form id="advanced_search" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" method="POST">
-                            <fieldset class=" border border-success rounded p-2">
-                                <legend class="w-auto ml-2">Enter terms into the desired fields:</legend>
+                            <fieldset class=" border border-success rounded p-3">
+                                <legend class="w-auto ml-2 text-success">Enter search terms into all desired fields:</legend>
                                 <div class="row mb-3"> <!-- begin row 1 -->
                                     <div class="col col-md-4"> <!-- begin row 1, column 1 -->
                                         <label for="first">First Name </label>
@@ -125,10 +125,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                         <input class="form-control" type="text" id="phone" name="phone" value="<?php echo (isset($phone) ? $phone: '');?>">
                                     </div> <!-- end div for 2nd column -->
                                     <div class="col col-md-2"> <!-- begin row 3, column 3 -->
-                                        <button class="btn btn-block btn-info p-2 mt-4" type="submit" value="Search In Any Fields" name="search_any" title="Click Search Any Fields">Search For <strong>Any</strong></button>
+                                        <button class="btn btn-block btn-primary p-2 mt-4" type="submit" value="Search In Any Fields" name="search_any" title="Click Search Any Fields">Search For <strong>Any</strong></button>
                                     </div> <!-- end div for 3rd column -->
                                     <div class="col col-md-2"> <!-- begin row 3, column 4 -->
-                                        <button class="btn btn-block btn-success p-2 mt-4" type="submit" value="Search For All Fields" name="search_all" title="Click Search All Fields">Search For <strong>All</strong></button>
+                                        <button class="btn btn-block btn-success p-2 mt-4" type="submit" value="Search For All Fields" name="search_all" title="Click Search All Fields">Search In <strong>All</strong></button>
                                     </div> <!-- end div for 4th column -->
                                 </div> <!-- end div for third row -->
                             </fieldset>

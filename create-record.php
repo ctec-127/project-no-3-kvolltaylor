@@ -8,7 +8,7 @@ require_once 'inc/layout/header.inc.php';
 <div class="container">
 	<div class="row mt-5">
 		<div class="col-lg-12">
-			<h1>Create a New Record</h1>
+			<h1 class="mb-4">Create a New Record</h1>
 			<!-- use magic constant of __DIR__ for the full path -->
 			<!-- use to add a row to the table if all fields are 
 			filled out correctly, or to display errors until filled out correctly -->

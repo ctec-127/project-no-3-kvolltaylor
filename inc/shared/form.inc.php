@@ -13,6 +13,7 @@ http://php.net/manual/en/language.operators.comparison.php#language.operators.co
 
 
 <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" method="POST">
+    <fieldset class=" border border-success rounded p-3 my-3">
     <div class="form-group">
         <label class="col-form col-form-label" for="first">First Name </label>
         <input class="form-control" type="text" id="first" name="first" value="<?php echo (isset($first) ? $first: '');?>">
@@ -113,8 +114,9 @@ http://php.net/manual/en/language.operators.comparison.php#language.operators.co
     <input type="hidden" name="id" value="<?php echo (isset($id) ? $id : '');?>">
 
     <?php # var_dump($row['degree_program']);?><br /><br />
-
-    <a href="display-records.php">Cancel</a>&nbsp;&nbsp;
-    <button class="btn btn-primary" type="submit">Save Record</button>
-
+    <div class="text-right">
+        <a class="btn btn-outline-primary" href="display-records.php">Cancel</a>&nbsp;&nbsp;
+        <button class="btn btn-primary" type="submit">Save Record</button>
+    </div>
+    </fieldset>
 </form>
